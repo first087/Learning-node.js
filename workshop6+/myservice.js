@@ -1,17 +1,19 @@
 var express = require('express');
 var app = express();
 
+// Workshop 10
 require('rootpath')();
-
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
+// Workshop 7
 app.get('/', function (req, res) {
     console.log("Hello Express!");
     res.send("Hello Express");
     // console.log(x.length);   // ทดสอบการเกิด Exception
 })
 
+// Workshop 10
 app.post('/crm/contacts/add', function (req, res) {
     var contactBiz = require('biz/contactBiz');
     contactBiz.add(req.body, function (result) {
