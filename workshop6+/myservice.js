@@ -19,7 +19,16 @@ app.post('/crm/contacts/add', function (req, res) {
     contactBiz.add(req.body, function (result) {
         res.send(result);
         delete contactBiz;
-    })
+    });
+});
+
+// Workshop 11
+app.get('/crm/contacts/getAll', function (req, res) {
+    var contactBiz = require('biz/contactBiz');
+    contactBiz.getAll(function (result) {
+        res.send(result);
+        delete contactBiz;
+    });    
 });
 
 app.listen(3000);
