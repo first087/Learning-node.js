@@ -1,0 +1,22 @@
+{
+  "name": "workshop6",
+  "version": "1.0.0",
+  "description": "desc",
+  "main": "workshop6.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": ">= 1.14.2",
+    "crypto-js": ">= 3.1.5",
+    "express": ">= 4.13.3",
+    "guid": "latest",
+    "orientjs": ">= 2.1.0",
+    "rootpath": ">= 0.1.2",
+    "winston": ">= 2.1.1",
+    "underscore": ">=1.8.3",
+    "useragent": "latest"
+  }
+}
