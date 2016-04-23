@@ -40,6 +40,15 @@ app.put('/crm/contacts/update', function (req, res) {
     });
 });
 
+// Workshop 13
+app.delete('crm/contacts/delete', function (req, res) {
+    var contactBiz = require('biz/contactBiz');
+    contactBiz.delete(req.body, function (result) {
+       res.send(result);
+       delete contactBiz; 
+    });
+});
+
 app.listen(3000);
 console.log("My Service is listening to port 3000.");
 
