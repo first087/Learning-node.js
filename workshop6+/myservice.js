@@ -41,7 +41,7 @@ app.put('/crm/contacts/update', function (req, res) {
 });
 
 // Workshop 13
-app.delete('crm/contacts/delete', function (req, res) {
+app.delete('/crm/contacts/delete', function (req, res) {
     var contactBiz = require('biz/contactBiz');
     contactBiz.delete(req.body, function (result) {
        res.send(result);
