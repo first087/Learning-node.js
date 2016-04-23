@@ -73,6 +73,7 @@ function execGet(req, res, next) {
         console.log('inputs:', inputs);
         func(inputs, function(result) {
             res.send(result);
+            writeResLog(req, 'info', result);
         });
     }
 }
@@ -91,9 +92,11 @@ function execPost(req, res, next) {
             func(req.body, function(result) {
                 console.log('result', result);
                 res.send(result);
+                writeResLog(req, 'info', result);
             });
         } catch (err) {
             res.send({code:500,status:"error",message:JSON.stringify(err)});
+            writeResLog(req, 'info', result);
         }
     }
 }
