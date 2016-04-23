@@ -17,10 +17,10 @@ function readTotalLines(filePath) {
 
 Promise.all(
     [
-        readTotalLines('../resources/contacts.txt'),
-        readTotalLines('../resources/contacts2.txt'),
-        readTotalLines('../resources/contacts3.txt'),
-        // readTotalLines('../resources/contacts4.txt'),
+        readTotalLines('./resources/contacts.txt'),
+        readTotalLines('./resources/contacts2.txt'),
+        readTotalLines('./resources/contacts3.txt'),
+        // readTotalLines('./resources/contacts4.txt'),
     ]
 ).then(function (values) {
     console.log(values);
