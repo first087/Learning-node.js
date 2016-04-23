@@ -6,6 +6,10 @@ require('rootpath')();
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
+// Workshop 15
+var winston = require('winston');
+var useragent = require('useragent');
+
 // // Workshop 7
 // app.get('/', function (req, res) {
 //     console.log("Hello Express!");
@@ -111,7 +115,74 @@ function executeApi(req, res, next) {
     }
 }
 
-app.all('*', executeApi);
+// Workshop 15
+var _guid = "";
+function getGuid(req, res, next) {
+    var Guid = require('guid');
+    _guid = Guid.create();
+    req.guid = _guid;
+    console.log(_guid);
+    next();
+}
+
+function getReqLog(log, req) {
+    log.guid = req.guid;
+    log.sessionID = req.sessionID;
+    log.ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    log.url = req.params;
+    log.method = req.method;
+    var agent = useragent.parse(req.headers['user-agent']);
+    log.os = agent.os;
+    log.device = agent.device;
+    log.browser = agent.toString();
+
+    return log;
+}
+
+function getResLog(log, level, req, result) {
+    log.guid = req.guid;
+    if (level=='info')
+        log.result = result;
+    else
+        log.message = result;
+
+    return log;
+}
+
+function writeLog(level, step, req, result) {
+    var log = {};
+    var now = new Date();
+    var fileName = now.toISOString().substring(0, 10);
+    log.step = step;
+
+    switch (step) {
+        case "start":
+            log = getReqLog(log, req);
+            break;
+        case "end":
+            log = getResLog(log, level, req, result);
+            break;
+    }
+    var logger = new winston.Logger({
+        level: level,
+        transports: [
+            new (winston.transports.File)({ filename: 'logs/'+fileName+ '.log' })
+        ]
+    });
+    console.log(log);
+    logger.log(level, log);
+}
+
+function writeReqLog(req, res, next) {
+    writeLog('info', 'start', req);
+    next();
+}
+
+function writeResLog(req, level, result) {
+    writeLog(level,'end', req, result);
+}
+
+app.all('*', getGuid, writeReqLog, executeApi);
 
 app.listen(3000);
 console.log("My Service is listening to port 3000.");
