@@ -31,6 +31,15 @@ app.get('/crm/contacts/getAll', function (req, res) {
     });    
 });
 
+// Workshop 12
+app.put('/crm/contacts/update', function (req, res) {
+    var contactBiz = require('biz/contactBiz');
+    contactBiz.update(req.body, function (result) {
+        res.send(result);
+        delete contactBiz;
+    });
+});
+
 app.listen(3000);
 console.log("My Service is listening to port 3000.");
 
