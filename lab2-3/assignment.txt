@@ -1,0 +1,13 @@
+Assignment
+-----------------------------------------------
+1. Install pm2
+2. Running hello.js application using pm2
+3. List and describe hello.js using pm2
+4. Check pm2 daemon status
+5. monitor pm2 application
+6. View log / flush logs
+7. Delete application
+8. Autostart application 
+
+9. Do 1-8 for API application from day #1
+
