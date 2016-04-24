@@ -1,0 +1,8 @@
+Assignment
+------------------------------------------
+1. Install hello.js as service
+2. Try start/restart the service
+3. Uninstall the service
+
+4. Do 1-3 for API application from day #1
+
